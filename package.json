@@ -1,0 +1,9 @@
+{
+  "name": "screeps-lodash",
+  "version": "1.0.0",
+  "description": "Lodash based screeps codebase",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-screeps": "^1.2.0"
+  }
+}
