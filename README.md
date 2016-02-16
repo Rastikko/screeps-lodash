@@ -1,6 +1,6 @@
 # screeps-lodash
 
-Pure screeps framework to dominute everyone else.
+Pure screeps framework to dominate the strongest.
 
  - Focus on use native lodash library.
  - Engine powered with grunt.
@@ -18,5 +18,11 @@ npm run build
 To test you shall
 
 ```shell
-npm test
+npm install -g mocha
+mocha test
+```
+
+To test an specific folder
+```shell
+mocha test/creep-factory
 ```
