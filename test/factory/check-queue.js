@@ -2,8 +2,8 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 
 var mockMeta = require('../mocks/alpha');
-var MockCreepFactory = require('../mocks/creep-factory');
-var checkQueue = require('../../src/creep-factory-check-queue');
+var MockCreepFactory = require('../mocks/factory');
+var checkQueue = require('../../src/factory-check-queue');
 
 describe('checkQueue', function() {
   var creepFactory;
@@ -31,7 +31,8 @@ describe('checkQueue', function() {
     creepFactory.provideStack = function() {
       return ['a', 'b'];
     }
-    var queue = creepFactory.checkQueue();
+    creepFactory.checkQueue();
+    var queue = creepFactory.queue;
     expect(queue.length).to.be.equal(2);
   });
 
@@ -43,7 +44,8 @@ describe('checkQueue', function() {
       'harvester': {},
       'depositer': {}
     }
-    var queue = creepFactory.checkQueue();
+    creepFactory.checkQueue();
+    var queue = creepFactory.queue;
     expect(queue.length).to.be.equal(4);
   });
 

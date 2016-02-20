@@ -3,8 +3,8 @@ var assert = require('chai').assert;
 var expect = require('chai').expect;
 
 var mockMeta = require('../mocks/alpha');
-var MockCreepFactory = require('../mocks/creep-factory');
-var provideStack = require('../../src/creep-factory-provide-stack');
+var MockCreepFactory = require('../mocks/factory');
+var provideStack = require('../../src/factory-provide-stack');
 
 describe('provideStack', function() {
 

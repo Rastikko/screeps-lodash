@@ -6,9 +6,10 @@ var _ = require('lodash');
 function checkQueue() {
   var meta = this.meta;
   var provideStack = this.provideStack;
-  return _.reduce(meta, function(queue, roleMeta, role) {
+  var stack = _.reduce(meta, function(queue, roleMeta, role) {
     return queue.concat(provideStack(role, roleMeta));
   }, []);
+  this.queue = _.sortBy(stack, ['priority']);
 }
 
 module.exports = checkQueue;
