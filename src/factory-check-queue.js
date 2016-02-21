@@ -4,10 +4,11 @@ var _ = require('lodash');
 // if there is no a single role then the first of each meta will have
 // runLevel 1, otherwise they will have 2
 function checkQueue() {
+  var _this = this;
   var meta = this.meta;
   var provideStack = this.provideStack;
   var stack = _.reduce(meta, function(queue, roleMeta, role) {
-    return queue.concat(provideStack(role, roleMeta));
+    return queue.concat(_this.provideStack(role, roleMeta));
   }, []);
   this.queue = _.sortBy(stack, ['priority']);
 }
