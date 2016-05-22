@@ -1,13 +1,18 @@
 function commandHarvestEnergy() {
-  console.log('this.carryCapacity', this.carryCapacity);
-  console.log('this.carry.energy', this.carry.energy);
   if (this.carry.energy < this.carryCapacity) {
-    var sources = this.room.find(FIND_SOURCES);
-    // TODO: find nearest non busy
-		if (this.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-			this.moveTo(sources[0]);
-		}
-    return 'SAVE';
+    var source = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
+      filter: function(source) {
+        return !source.isClaimed();
+      }
+    });
+    if (source) {
+      source.claim();
+      var result = this.harvest(source);
+      if (result === ERR_NOT_IN_RANGE) {
+        this.moveTo(source);
+      }
+      return 'SAVE';
+    }
 	}
   console.log('RETURN DELETE');
   return 'DELETE';

@@ -1,6 +1,7 @@
 require('_room');
 require('_spawn');
 require('_creep');
+require('_source');
 var Factory = require('factory');
 var commander = require('commander');
 var metaAlpha = require('meta-alpha');
