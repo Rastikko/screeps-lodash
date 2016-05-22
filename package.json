@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Lodash based screeps codebase",
   "scripts": {
-    "build": "grunt copy && grunt screeps"
+    "build": "grunt screeps"
   },
   "devDependencies": {
     "chai": "^3.5.0",

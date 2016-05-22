@@ -1,5 +1,6 @@
 require('_room');
 require('_spawn');
+require('_creep');
 var Factory = require('factory');
 var commander = require('commander');
 var metaAlpha = require('meta-alpha');
@@ -14,11 +15,21 @@ main.getCreeps = function() {
   return Game['creeps'];
 }
 
+main.loopRoles = function(creep) {
+  console.log('creep.memory.role: ', creep.memory.role);
+  if (creep.memory.role === 'harvester') {
+    commander.stack(['commandHarvestEnergy', 'commandDepositEnergy'], creep);
+  }
+}
+
 main.loopCreeps = function(room) {
   var creeps = main.getCreeps();
   for (var creepName in creeps) {
     var creep = creeps[creepName];
-
+    console.log('creep: ', creep);
+    if (!commander.check(creep)) {
+      main.loopRoles(creep);
+    }
   }
 }
 
@@ -32,6 +43,7 @@ main.loopRooms = function() {
 }
 
 main.loopRooms();
+main.loopCreeps();
 
 // iterate through rooms
   // for each room make a spawn check

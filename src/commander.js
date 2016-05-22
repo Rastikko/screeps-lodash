@@ -12,15 +12,18 @@ Commander.getTargetObject = function(target) {
 
 Commander.save = function(name, target, parameters) {
   var targetObject = Commander.getTargetObject(target);
-  console.log('targetObject', targetObject);
+  // console.log('Commander.save targetObject:', targetObject);
   targetObject['memory']['command'] = {};
   targetObject['memory']['command']['name'] = name;
   targetObject['memory']['command']['targetId'] = target.id;
   targetObject['memory']['command']['parameters'] = parameters;
 }
 
-Commander.delete = function(target) {
-  targetObject['memory']['command'] = undefined;
+Commander.delete = function(targetObject) {
+  console.log('DELETE', targetObject['memory']);
+  if (targetObject['memory']) {
+    delete targetObject['memory']['command'];
+  }
 }
 
 Commander.check = function(target) {
@@ -31,30 +34,32 @@ Commander.check = function(target) {
     Commander.execute(targetCommandMemory['name'], targetObject, targetCommandMemory['parameters']);
   }
   return haveCommand;
-  console.log(haveCommand);
 }
 
 Commander.execute = function(name, target, parameters) {
   var targetObject = Commander.getTargetObject(target);
 
-  if (targetObject.isBussy) {
-    return;
-  }
-
+  // console.log('Commander.execute targetObject[name]', targetObject[name]);
+  console.log('Commander.execute targetObject', targetObject);
+  console.log('Commander.execute name', name);
   var result = targetObject[name].apply(targetObject, parameters);
-  console.log('result', result);
+  console.log('Commander.execute result, name, target, paramenters', result, name, target, parameters);
   if (result === 'SAVE') {
     Commander.save(name, target, parameters);
   }
   if (result === 'DELETE') {
-    Commander.delete(name, target, parameters);
-  }
-  if (result === 'FREE') {
-    // nothing.. just keep for guudies
+    Commander.delete(target);
   }
   return result;
 }
 
-// execute: name, [].slice.call(parameters, 1);
+Commander.stack = function(names, target) {
+  console.log('commander stack:', names);
+  for (var i = 0; i < names.length; i++) {
+    if (Commander.execute(names[i], target) === 'SAVE') {
+      return;
+    }
+  }
+}
 
 module.exports = Commander;
