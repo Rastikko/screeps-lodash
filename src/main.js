@@ -20,6 +20,9 @@ main.loopRoles = function(creep) {
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
+  if (creep.memory.role === 'carrier') {
+    commander.stack(['commandCarryEnergy', 'commandDepositEnergy'], creep);
+  }
 }
 
 main.loopCreeps = function(room) {

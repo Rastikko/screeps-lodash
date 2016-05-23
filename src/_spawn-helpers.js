@@ -37,6 +37,8 @@ function getParts(role, maxCost) {
   switch (role) {
     case 'harvester':
       return calculateParts(WORKER_PARTS, maxCost);
+    case 'carrier':
+      return calculateParts(MOVER_PARTS, maxCost);
   }
 }
 

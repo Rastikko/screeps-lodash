@@ -11,9 +11,9 @@ function commandHarvestEnergy() {
           return !source.isClaimed();
         }
       });
+      if (source) this['memory']['claimedSource'] = source.id;
     }
     if (source) {
-      this['memory']['claimedSource'] = source.id;
       var result = this.harvest(source);
       if (result === ERR_NOT_IN_RANGE) {
         this.moveTo(source);
