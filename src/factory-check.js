@@ -10,7 +10,6 @@ function check() {
   }
   this.checkQueue();
   var firstQueue = this.queue[0];
-  console.log(firstQueue);
   if (firstQueue) {
     commander.execute('commandQueueCreep', spawn, [firstQueue]);
   }

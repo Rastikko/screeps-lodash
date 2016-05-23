@@ -1,12 +1,20 @@
 function commandHarvestEnergy() {
   if (this.carry.energy < this.carryCapacity) {
-    var source = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
-      filter: function(source) {
-        return !source.isClaimed();
-      }
-    });
+    // check for claimed source in memory
+    var source;
+    if (this['memory']['claimedSource']) {
+      source = Game.getObjectById(this['memory']['claimedSource']);
+    }
+    if (!source) {
+      source = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
+        filter: function(source) {
+          return !source.isClaimed();
+        }
+      });
+    }
+    console.log('source', source);
     if (source) {
-      source.claim();
+      this['memory']['claimedSource'] = source.id;
       var result = this.harvest(source);
       if (result === ERR_NOT_IN_RANGE) {
         this.moveTo(source);
@@ -14,7 +22,6 @@ function commandHarvestEnergy() {
       return 'SAVE';
     }
 	}
-  console.log('RETURN DELETE');
   return 'DELETE';
 }
 

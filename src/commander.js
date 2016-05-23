@@ -12,7 +12,6 @@ Commander.getTargetObject = function(target) {
 
 Commander.save = function(name, target, parameters) {
   var targetObject = Commander.getTargetObject(target);
-  // console.log('Commander.save targetObject:', targetObject);
   targetObject['memory']['command'] = {};
   targetObject['memory']['command']['name'] = name;
   targetObject['memory']['command']['targetId'] = target.id;
@@ -20,7 +19,6 @@ Commander.save = function(name, target, parameters) {
 }
 
 Commander.delete = function(targetObject) {
-  console.log('DELETE', targetObject['memory']);
   if (targetObject['memory']) {
     delete targetObject['memory']['command'];
   }
@@ -38,12 +36,10 @@ Commander.check = function(target) {
 
 Commander.execute = function(name, target, parameters) {
   var targetObject = Commander.getTargetObject(target);
-
-  // console.log('Commander.execute targetObject[name]', targetObject[name]);
-  console.log('Commander.execute targetObject', targetObject);
-  console.log('Commander.execute name', name);
+  if (targetObject['memory']['command'] === undefined && targetObject.say) {
+    targetObject.say(name.replace('command', ''));
+  }
   var result = targetObject[name].apply(targetObject, parameters);
-  console.log('Commander.execute result, name, target, paramenters', result, name, target, parameters);
   if (result === 'SAVE') {
     Commander.save(name, target, parameters);
   }
@@ -54,7 +50,6 @@ Commander.execute = function(name, target, parameters) {
 }
 
 Commander.stack = function(names, target) {
-  console.log('commander stack:', names);
   for (var i = 0; i < names.length; i++) {
     if (Commander.execute(names[i], target) === 'SAVE') {
       return;

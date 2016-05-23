@@ -8,9 +8,6 @@ function commandQueueCreep(creepDefinition) {
   var capacityAvailable = this.room.energyCapacityAvailable * (creepCount / totalCreeps);
   capacityAvailable = Math.floor(capacityAvailable * 0.7);
   capacityAvailable = Math.max(capacityAvailable, 300);
-  // console.log("CrepCount: " + creepCount);
-  // console.log("totalCreep: " + totalCreeps);
-  // console.log('energyCapacityAvailable ' + this.room.energyCapacityAvailable);
   var role = creepDefinition.role;
   var parts = spawnHelpers.getParts(role, capacityAvailable);
 

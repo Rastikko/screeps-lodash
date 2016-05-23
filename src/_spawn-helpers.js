@@ -22,7 +22,6 @@ function getPartCost(part) {
 }
 
 function calculateParts(parts, maxCost) {
-  // console.log(parts.toString() + maxCost.toString());
   let i = 0;
   let totalCost = 0;
   let finalParts = [];

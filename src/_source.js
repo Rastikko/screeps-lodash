@@ -1,10 +1,6 @@
 Source.prototype.availableTiles = function() {
-  var memoryAvailableTiles = this['memory'] && this['memory']['availableTiles'];
-  if (memoryAvailableTiles) {
-    return memoryAvailableTiles;
-  }
-  var tiles = this.room.lookAtArea(this.pos.y - 1, this.pos.x - 1, this.pos.y + 1, this.pos.x + 1);
-  console.log('tiles', tiles);
+  var tiles =
+    this.room.lookAtArea(this.pos.y - 1, this.pos.x - 1, this.pos.y + 1, this.pos.x + 1);
   var availableTiles = 0;
   for (var tileY in tiles) {
     for (var tileX in tiles[tileY]) {
@@ -17,22 +13,22 @@ Source.prototype.availableTiles = function() {
       }
     }
   }
-  memoryAvailableTiles = availableTiles;
   return availableTiles;
 }
 
 Source.prototype.isClaimed = function() {
-  console.log('isClaimed', this);
-  var availableTiles = this.availableTiles();
-  var isClaimed = availableTiles > 0 && this._claims < availableTiles;
-  this._claimed = isClaimed;
-  return isClaimed;
-}
-
-Source.prototype.claim = function() {
-  if (!this._claims) {
-    this._claims = 1;
-  } else {
-    this._claims++;
+  // find room creeps with claimedSource id this.id
+  console.log('this.isClaimed', this._isClaimed);
+  if (this._isClaimed) {
+    return true;
   }
+  // TODO: fix claims
+  var claims = this.room.find(FIND_MY_CREEPS, {
+    filter: {memory: { claimedSource: this.id }}
+  });
+  console.log('claims', claims);
+  var availableTiles = this.availableTiles();
+  var _isClaimed = availableTiles > 0 && claimArray.length < availableTiles;
+  this._isClaimed = _isClaimed;
+  return _isClaimed;
 }

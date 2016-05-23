@@ -17,7 +17,6 @@ main.getCreeps = function() {
 }
 
 main.loopRoles = function(creep) {
-  console.log('creep.memory.role: ', creep.memory.role);
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
@@ -27,7 +26,6 @@ main.loopCreeps = function(room) {
   var creeps = main.getCreeps();
   for (var creepName in creeps) {
     var creep = creeps[creepName];
-    console.log('creep: ', creep);
     if (!commander.check(creep)) {
       main.loopRoles(creep);
     }
