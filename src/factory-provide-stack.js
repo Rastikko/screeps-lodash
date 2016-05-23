@@ -1,8 +1,8 @@
 var _ = require('lodash');
 
-function _priorityCalculation(role, iCreep) {
-  if (role === 'harvester' || role === 'depositer') {
-    return  (iCreep === 0) ? 1 : 2;
+function _priorityCalculation(role, nCreep) {
+  if (role === 'harvester' || role === 'carrier') {
+    return  (nCreep === 0) ? 1 : 2;
   }
   return  2;
 }
@@ -13,25 +13,20 @@ function _priorityCalculation(role, iCreep) {
 function provideStack(role, roleMeta) {
   var room = this.room;
   var roleStack = [];
-  var creeps = room.creeps;
-  var roleCreeps = _.filter(creeps, { 'memory': { role: role }});
 
+  var roleCreeps = this.room.find(FIND_MY_CREEPS, { filter: {memory: { role: role }} });
   for (var iMeta = 0; iMeta < roleMeta.length; iMeta++) {
     var count = roleMeta[iMeta].count;
-    var flagName = roleMeta[iMeta].flagName;
-    var flagNameCreeps = _.filter(roleCreeps, { 'memory': { flagName: flagName }});
 
-    for (var iCreep = flagNameCreeps.length; iCreep < count; iCreep++) {
-      var priority = _priorityCalculation(role, iCreep);
+    for (var nCreep = roleCreeps.length; nCreep < count; nCreep++) {
+      var priority = _priorityCalculation(role, nCreep);
       roleStack.push({
         role: role,
-        priority: priority,
-        flagName: flagName
+        priority: priority
       });
     }
 
   }
-
   return roleStack;
 }
 

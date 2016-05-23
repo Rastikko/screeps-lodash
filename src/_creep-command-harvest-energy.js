@@ -12,7 +12,6 @@ function commandHarvestEnergy() {
         }
       });
     }
-    console.log('source', source);
     if (source) {
       this['memory']['claimedSource'] = source.id;
       var result = this.harvest(source);
