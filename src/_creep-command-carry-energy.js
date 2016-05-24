@@ -6,6 +6,7 @@ function commandCarryEnergy() {
       source = Game.getObjectById(this['memory']['carriedSource']);
     }
     if (!source) {
+      // instead get the less carried source possible.
       source = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
         filter: function(source) {
           return !source.isCarried();
