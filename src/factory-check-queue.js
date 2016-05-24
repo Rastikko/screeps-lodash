@@ -10,8 +10,9 @@ function checkQueue() {
   var stack = _.reduce(meta, function(queue, roleMeta, role) {
     return queue.concat(_this.provideStack(role, roleMeta));
   }, []);
-  console.log('stack[0].role', stack[0].role);
-  console.log('stack[1].role', stack[1].role);
+  // TODO: fix the bug with the priority not being ordered
+  // console.log('stack[0].role', stack[0].role);
+  // console.log('stack[1].role', stack[1].role);
   this.queue = _.sortBy(stack, ['priority']);
 }
 

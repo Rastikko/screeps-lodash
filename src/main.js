@@ -23,6 +23,13 @@ main.loopRoles = function(creep) {
   if (creep.memory.role === 'carrier') {
     commander.stack(['commandCarryEnergy', 'commandDepositEnergy'], creep);
   }
+  // Deny if spammer is bussy
+  if (creep.memory.role === 'upgrader') {
+    commander.stack(['commandUpgrade'], creep);
+  }
+  if (creep.memory.role === 'depositer') {
+    commander.stack(['commandPickup', 'commandTransfer'], creep);
+  }
 }
 
 main.loopCreeps = function(room) {

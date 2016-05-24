@@ -22,9 +22,9 @@ function getPartCost(part) {
 }
 
 function calculateParts(parts, maxCost) {
-  let i = 0;
-  let totalCost = 0;
-  let finalParts = [];
+  var i = 0;
+  var totalCost = 0;
+  var finalParts = [];
   while (totalCost < maxCost) {
     finalParts.push(parts[i % parts.length]);
     i++;
@@ -38,6 +38,10 @@ function getParts(role, maxCost) {
     case 'harvester':
       return calculateParts(WORKER_PARTS, maxCost);
     case 'carrier':
+      return calculateParts(MOVER_PARTS, maxCost);
+    case 'upgrader':
+      return calculateParts(WORKER_PARTS, maxCost);
+    case 'depositer':
       return calculateParts(MOVER_PARTS, maxCost);
   }
 }

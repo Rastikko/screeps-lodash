@@ -1,7 +1,7 @@
 function commandHarvestEnergy() {
 
   if (this.carry.energy) {
-    let target = Game.spawns.Spawn1;
+    var target = Game.spawns.Spawn1;
 
     if (this.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
       this.moveTo(target);

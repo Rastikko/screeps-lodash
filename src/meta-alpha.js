@@ -1,4 +1,6 @@
 module.exports = {
-  harvester: [{ count: 3, flagName: 'harvester'}],
-  carrier: [{ count: 2, flagName: "carrier" }]
+  harvester: [{ count: 3 }],
+  carrier: [{ count: 1 }],
+  upgrader: [{ count: 6}],
+  depositer: [{ count: 2}]
 };
