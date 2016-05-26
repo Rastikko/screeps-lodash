@@ -11,8 +11,11 @@ function check() {
   this.checkQueue();
   var firstQueue = this.queue[0];
   if (firstQueue) {
+    this.room.memory.spamming = true;
     commander.execute('commandQueueCreep', spawn, [firstQueue]);
+    return;
   }
+  this.room.memory.spamming = false;
 }
 
 module.exports = check;

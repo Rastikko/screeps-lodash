@@ -1,6 +1,7 @@
 var WORKER_PARTS = [WORK, WORK, CARRY, MOVE];
 var MOVER_PARTS = [CARRY, MOVE];
-var BUILDER_PARTS = [WORK, CARRY, MOVE, CARRY, MOVE];
+var BUILDER_PARTS = [WORK, CARRY, MOVE];
+var ATTACK_PARTS = [ATTACK, TOUGH, MOVE]
 
 function getPartCost(part) {
   switch (part) {
@@ -43,6 +44,10 @@ function getParts(role, maxCost) {
       return calculateParts(WORKER_PARTS, maxCost);
     case 'depositer':
       return calculateParts(MOVER_PARTS, maxCost);
+    case 'builder':
+      return calculateParts(BUILDER_PARTS, maxCost);
+    case 'guard':
+      return calculateParts(ATTACK_PARTS, maxCost);
   }
 }
 

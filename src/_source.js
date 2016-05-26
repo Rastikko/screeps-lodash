@@ -18,6 +18,7 @@ Source.prototype.availableTiles = function() {
   return availableTiles;
 }
 
+// Instead of doing all for one, we should do 1 on each
 Source.prototype.isClaimed = function() {
   // find room creeps with claimedSource id this.id
   if (this._isClaimed) {
@@ -32,6 +33,7 @@ Source.prototype.isClaimed = function() {
   return _isClaimed;
 }
 
+// Instead of doing all for one, we should do 1 on each
 Source.prototype.isCarried = function() {
   if (this._isCarried) return true;
   var claims = this.room.find(FIND_MY_CREEPS, {

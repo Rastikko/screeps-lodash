@@ -17,6 +17,7 @@ main.getCreeps = function() {
 }
 
 main.loopRoles = function(creep) {
+  var roomSpamming = creep.room.memory.spamming;
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
@@ -25,10 +26,18 @@ main.loopRoles = function(creep) {
   }
   // Deny if spammer is bussy
   if (creep.memory.role === 'upgrader') {
-    commander.stack(['commandUpgrade'], creep);
+    if (!roomSpamming) {
+      commander.stack(['commandUpgrade'], creep);
+    }
   }
   if (creep.memory.role === 'depositer') {
     commander.stack(['commandPickup', 'commandTransfer'], creep);
+  }
+  if (creep.memory.role === 'builder') {
+    commander.stack(['commandPickup', 'commandBuild', 'commandRepair'], creep);
+  }
+  if (creep.memory.role === 'guard') {
+    commander.stack(['commandGuard'], creep);
   }
 }
 
@@ -53,11 +62,3 @@ main.loopRooms = function() {
 
 main.loopRooms();
 main.loopCreeps();
-
-// iterate through rooms
-  // for each room make a spawn check
-
-// Iterate through creeps
-  // switch between roles
-  // check if isBussy
-  // assign tasks depending on role if he is not

@@ -2,7 +2,7 @@ var spawnHelpers = require('_spawn-helpers');
 
 function commandQueueCreep(creepDefinition) {
   // TODO: calculate this dinamically
-  var totalCreeps = 9;
+  var totalCreeps = 14;
 
   var creepCount = this.room.find(FIND_MY_CREEPS).length;
   var capacityAvailable = this.room.energyCapacityAvailable * (creepCount / totalCreeps);
@@ -15,7 +15,7 @@ function commandQueueCreep(creepDefinition) {
     return 'SAVE';
   };
 
-  this.createCreep(parts, null, creepDefinition);
+  console.log('createCreep:', this.createCreep(parts, null, creepDefinition));
   return 'DELETE';
 }
 
