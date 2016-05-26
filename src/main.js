@@ -17,7 +17,6 @@ main.getCreeps = function() {
 }
 
 main.loopRoles = function(creep) {
-  var roomSpamming = creep.room.memory.spamming;
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
@@ -26,9 +25,7 @@ main.loopRoles = function(creep) {
   }
   // Deny if spammer is bussy
   if (creep.memory.role === 'upgrader') {
-    if (!roomSpamming) {
-      commander.stack(['commandUpgrade'], creep);
-    }
+    commander.stack(['commandUpgrade'], creep);
   }
   if (creep.memory.role === 'depositer') {
     commander.stack(['commandPickup', 'commandTransfer'], creep);

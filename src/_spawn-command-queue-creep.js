@@ -12,6 +12,7 @@ function commandQueueCreep(creepDefinition) {
   var parts = spawnHelpers.getParts(role, capacityAvailable);
 
   if (this.canCreateCreep(parts) === ERR_NOT_ENOUGH_ENERGY) {
+    console.log("NNOOOO");
     return 'SAVE';
   };
 

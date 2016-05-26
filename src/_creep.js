@@ -6,6 +6,7 @@ var commandTransfer = require('_creep-command-transfer');
 var commandUpgrade = require('_creep-command-upgrade');
 var commandBuild = require('_creep-command-build');
 var commandRepair = require('_creep-command-repair');
+var commandGuard = require('_creep-command-guard');
 
 Creep.prototype.commandHarvestEnergy = commandHarvestEnergy;
 Creep.prototype.commandDepositEnergy = commandDepositEnergy;
@@ -15,3 +16,4 @@ Creep.prototype.commandTransfer = commandTransfer;
 Creep.prototype.commandUpgrade = commandUpgrade;
 Creep.prototype.commandBuild = commandBuild;
 Creep.prototype.commandRepair = commandRepair;
+Creep.prototype.commandGuard = commandGuard;

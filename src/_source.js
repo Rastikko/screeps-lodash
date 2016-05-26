@@ -33,7 +33,6 @@ Source.prototype.isClaimed = function() {
   return _isClaimed;
 }
 
-// Instead of doing all for one, we should do 1 on each
 Source.prototype.isCarried = function() {
   if (this._isCarried) return true;
   var claims = this.room.find(FIND_MY_CREEPS, {

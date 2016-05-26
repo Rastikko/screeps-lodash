@@ -26,7 +26,7 @@ function calculateParts(parts, maxCost) {
   var i = 0;
   var totalCost = 0;
   var finalParts = [];
-  while (totalCost < maxCost) {
+  while (totalCost + getPartCost(parts[i % parts.length]) < maxCost) {
     finalParts.push(parts[i % parts.length]);
     i++;
     totalCost += getPartCost(parts[i % parts.length]);

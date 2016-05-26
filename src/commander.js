@@ -19,6 +19,7 @@ Commander.save = function(name, target, parameters) {
 }
 
 Commander.delete = function(targetObject) {
+  // delete also parameters
   if (targetObject['memory']) {
     delete targetObject['memory']['command'];
   }
