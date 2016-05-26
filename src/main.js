@@ -59,3 +59,7 @@ main.loopRooms = function() {
 
 main.loopRooms();
 main.loopCreeps();
+
+// TODO: refactor carrie so carry, pickup and deposite are the same?
+// check who have the most energy available.
+// if there is none who is carriying it then claim it
