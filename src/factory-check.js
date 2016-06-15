@@ -5,13 +5,11 @@ var commander = require('commander');
 function check() {
   var spawn = this.room.getSpawn();
   var haveCommand = commander.check(spawn);
-  console.log('haveCommand', haveCommand);
   if (haveCommand) {
     return;
   }
   this.checkQueue();
   var firstQueue = this.queue[0];
-  console.log('firstQueue', firstQueue && firstQueue.role);
   if (firstQueue) {
     this.room.memory.spamming = true;
     commander.execute('commandQueueCreep', spawn, [firstQueue]);

@@ -27,6 +27,9 @@ Commander.delete = function(targetObject) {
 
 Commander.check = function(target) {
   var targetObject = Commander.getTargetObject(target);
+  if  (!targetObject) {
+    return false;
+  }
   var haveCommand = targetObject['memory']['command'] !== undefined;
   if (haveCommand) {
     var targetCommandMemory = targetObject['memory']['command'];
