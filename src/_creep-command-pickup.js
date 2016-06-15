@@ -1,4 +1,7 @@
 function commandPickup() {
+  if (this.room.memory.spamming) {
+    return 'DELETE';
+  }
   if ((this.carry.energy || 0) < this.carryCapacity) {
     var target = this.room.getSpawn();
     var result = target.transferEnergy(this);

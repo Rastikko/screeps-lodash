@@ -25,13 +25,15 @@ main.loopRoles = function(creep) {
   }
   // Deny if spammer is bussy
   if (creep.memory.role === 'upgrader') {
-    commander.stack(['commandUpgrade'], creep);
+    creep['memory']['claimedSource'] = null;
+    commander.stack(['commandUpgrade', 'commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
   if (creep.memory.role === 'depositer') {
-    commander.stack(['commandPickup', 'commandTransfer'], creep);
+    commander.stack(['commandPickup', 'commandTransfer', 'commandCarryEnergy', 'commandDepositEnergy'], creep);
   }
   if (creep.memory.role === 'builder') {
-    commander.stack(['commandPickup', 'commandBuild', 'commandRepair'], creep);
+    creep['memory']['claimedSource'] = null;
+    commander.stack(['commandPickup', 'commandBuild', 'commandRepair', 'commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
   if (creep.memory.role === 'guard') {
     commander.stack(['commandGuard'], creep);

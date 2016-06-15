@@ -14,8 +14,7 @@ function commandQueueCreep(creepDefinition) {
   if (this.canCreateCreep(parts) === ERR_NOT_ENOUGH_ENERGY) {
     return 'SAVE';
   };
-
-  console.log('createCreep:', this.createCreep(parts, null, creepDefinition));
+  this.createCreep(parts, null, creepDefinition)
   return 'DELETE';
 }
 

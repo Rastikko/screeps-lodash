@@ -33,12 +33,12 @@ Source.prototype.isClaimed = function() {
   return _isClaimed;
 }
 
-Source.prototype.isCarried = function() {
+Source.prototype.isCarried = function(distance) {
   if (this._isCarried) return true;
   var claims = this.room.find(FIND_MY_CREEPS, {
     filter: {memory: { carriedSource: this.id }}
   });
   // TODO instead of just one carrier calculate base on distance
-  var _isCarried = claims.length > 0;
+  var _isCarried = claims.length >= Math.ceil(distance / 10);
   return this._isCarried = _isCarried;
 }

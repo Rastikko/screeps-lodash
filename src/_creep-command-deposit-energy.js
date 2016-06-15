@@ -1,7 +1,16 @@
-function commandHarvestEnergy() {
-
+function commandDepositEnergy() {
   if (this.carry.energy) {
-    var target = this.room.getSpawn();
+    console.log('this.pos', this.pos);
+    var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
+      filter: function(obj) {
+        return obj.structureType == STRUCTURE_EXTENSION && obj.energy < obj.energyCapacity;
+      }
+    });
+    console.log('target', target);
+
+    if (!target) {
+      target = this.room.getSpawn();
+    }
 
     if (this.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
       this.moveTo(target);
@@ -12,4 +21,4 @@ function commandHarvestEnergy() {
   return 'DELETE';
 }
 
-module.exports = commandHarvestEnergy;
+module.exports = commandDepositEnergy;

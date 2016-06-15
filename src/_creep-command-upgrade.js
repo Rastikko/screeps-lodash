@@ -1,6 +1,5 @@
 function commandUpgrade() {
   if (this.room.memory.spamming) {
-    this.moveTo(Game.flags.Away);
     return 'DELETE';
   }
   var result = this.upgradeController(this.room.controller);

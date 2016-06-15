@@ -7,9 +7,11 @@ function commandCarryEnergy() {
     }
     if (!source) {
       // instead get the less carried source possible.
+      var self = this;
       source = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE, {
         filter: function(source) {
-          return !source.isCarried();
+          var distance = source.pos.getRangeTo(self);
+          return !source.isCarried(distance);
         }
       });
       if (source) this['memory']['carriedSource'] = source.id;
@@ -31,6 +33,7 @@ function commandCarryEnergy() {
       return 'SAVE';
     }
 	}
+  this['memory']['carriedSource'] = null;
   return 'DELETE';
 }
 

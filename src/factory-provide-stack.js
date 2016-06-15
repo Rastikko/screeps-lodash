@@ -18,10 +18,6 @@ function provideStack(role, roleMeta) {
 
     for (var nCreep = roleCreeps.length; nCreep < count; nCreep++) {
       var priority = _priorityCalculation(role, nCreep);
-      console.log('role', role);
-      console.log('priority', priority);
-      console.log('nCreep', nCreep);
-      console.log('--------------------');
       roleStack.push({
         role: role,
         priority: priority
