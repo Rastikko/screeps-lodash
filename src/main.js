@@ -2,6 +2,7 @@ require('_room');
 require('_spawn');
 require('_creep');
 require('_source');
+require('_tower');
 var Factory = require('factory');
 var commander = require('commander');
 var metaAlpha = require('meta-alpha');
@@ -40,12 +41,23 @@ main.loopRoles = function(creep) {
   }
 }
 
-main.loopCreeps = function(room) {
+main.loopCreeps = function() {
   var creeps = main.getCreeps();
   for (var creepName in creeps) {
     var creep = creeps[creepName];
     if (!commander.check(creep)) {
       main.loopRoles(creep);
+    }
+  }
+}
+
+main.loopTowers = function(room) {
+  var towers = room.getTowers();
+  for (var tower in towers) {
+    console.log(tower);
+    // TODO: make it so command can work
+    if (!towers[tower].commandAttack()) {
+      towers[tower].commandRepair();
     }
   }
 }
@@ -56,6 +68,7 @@ main.loopRooms = function() {
     // for now we just have 1 room and 1 meta, so is fine..
     var roomFactory = new Factory(rooms[roomName], metaAlpha);
     roomFactory.check();
+    main.loopTowers(rooms[roomName]);
   }
 }
 
