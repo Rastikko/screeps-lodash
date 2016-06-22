@@ -6,7 +6,6 @@ function commandPickup() {
       creeps: ['harvest']
     }, 20);
     this.moveTo(target);
-    console.log('target', target);
     this.withdrawEnergy(target);
     return 'SAVE';
   }

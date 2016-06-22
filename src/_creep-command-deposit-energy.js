@@ -14,11 +14,13 @@ function commandDepositEnergy() {
       target = this.room.getEmptyTower();
     }
 
-    if (this.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-      this.moveTo(target);
+    if (target) {
+      if (this.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+        this.moveTo(target);
+      }
+      // TODO: if someone is targeting me move to the target instead
+      return 'SAVE';
     }
-    // TODO: if someone is targeting me move to the target instead
-    return 'SAVE';
   }
   return 'DELETE';
 }

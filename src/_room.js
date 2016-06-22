@@ -25,7 +25,7 @@ Room.prototype.getTowers = function() {
 Room.prototype.getEmptyTower = function() {
   var towers = this.find(FIND_MY_STRUCTURES, {
     filter: function(obj) {
-      return obj.structureType == STRUCTURE_TOWER && obj.energy < obj.energyCapacity;
+      return obj.structureType == STRUCTURE_TOWER && obj.energy === 0;
     }
   });
   if (towers.length) {

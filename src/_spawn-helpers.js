@@ -1,4 +1,5 @@
-var WORKER_PARTS = [WORK, WORK, MOVE];
+var HARVESTER_PARTS = [WORK, WORK, MOVE];
+var UPGRADER_PARTS = [WORK, WORK, CARRY, MOVE];
 var MOVER_PARTS = [CARRY, MOVE];
 var BUILDER_PARTS = [WORK, CARRY, MOVE];
 var ATTACK_PARTS = [ATTACK, TOUGH, MOVE]
@@ -37,13 +38,11 @@ function calculateParts(parts, maxCost) {
 function getParts(role, maxCost) {
   switch (role) {
     case 'harvester':
-      return calculateParts(WORKER_PARTS, maxCost);
+      return calculateParts(HARVESTER_PARTS, maxCost);
     case 'carrier':
       return calculateParts(MOVER_PARTS, maxCost);
     case 'upgrader':
-      return calculateParts(WORKER_PARTS, maxCost);
-    case 'depositer':
-      return calculateParts(MOVER_PARTS, maxCost);
+      return calculateParts(UPGRADER_PARTS, maxCost);
     case 'builder':
       return calculateParts(BUILDER_PARTS, maxCost);
     case 'guard':

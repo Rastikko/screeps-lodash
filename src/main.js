@@ -9,6 +9,12 @@ var metaAlpha = require('meta-alpha');
 
 var main = {};
 
+for(var i in Memory.creeps) {
+    if(!Game.creeps[i]) {
+        delete Memory.creeps[i];
+    }
+}
+
 main.getRooms = function() {
   return Game['rooms'];
 }
@@ -21,21 +27,15 @@ main.loopRoles = function(creep) {
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy'], creep);
   }
-  // TODO: merge carrier and depositer
   if (creep.memory.role === 'carrier') {
-    commander.stack(['commandPickup', 'commandDepositEnergy'], creep);
+    commander.stack(['commandPickup', 'commandDepositEnergy', 'commandTransfer'], creep);
   }
   // Deny if spammer is bussy
   if (creep.memory.role === 'upgrader') {
-    creep['memory']['claimedSource'] = null;
-    commander.stack(['commandUpgrade', 'commandHarvestEnergy', 'commandDepositEnergy'], creep);
-  }
-  if (creep.memory.role === 'depositer') {
-    commander.stack(['commandPickup', 'commandTransfer', 'commandDepositEnergy'], creep);
+    commander.stack(['commandUpgrade'], creep);
   }
   if (creep.memory.role === 'builder') {
-    creep['memory']['claimedSource'] = null;
-    commander.stack(['commandPickup', 'commandBuild', 'commandRepair', 'commandHarvestEnergy', 'commandDepositEnergy'], creep);
+    commander.stack(['commandPickup', 'commandBuild', 'commandRepair'], creep);
   }
   if (creep.memory.role === 'guard') {
     commander.stack(['commandGuard'], creep);
@@ -55,7 +55,6 @@ main.loopCreeps = function() {
 main.loopTowers = function(room) {
   var towers = room.getTowers();
   for (var tower in towers) {
-    console.log(tower);
     // TODO: make it so command can work
     if (!towers[tower].commandAttack()) {
       towers[tower].commandRepair();
