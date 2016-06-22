@@ -17,28 +17,3 @@ Source.prototype.availableTiles = function() {
   }
   return availableTiles;
 }
-
-// Instead of doing all for one, we should do 1 on each
-Source.prototype.isClaimed = function() {
-  // find room creeps with claimedSource id this.id
-  if (this._isClaimed) {
-    return true;
-  }
-  var claims = this.room.find(FIND_MY_CREEPS, {
-    filter: {memory: { claimedSource: this.id }}
-  });
-  var availableTiles = this.availableTiles();
-  var _isClaimed = claims.length >= availableTiles;
-  this._isClaimed = _isClaimed;
-  return _isClaimed;
-}
-
-Source.prototype.isCarried = function(distance) {
-  if (this._isCarried) return true;
-  var claims = this.room.find(FIND_MY_CREEPS, {
-    filter: {memory: { carriedSource: this.id }}
-  });
-  // TODO instead of just one carrier calculate base on distance
-  var _isCarried = claims.length >= Math.ceil(distance / 10);
-  return this._isCarried = _isCarried;
-}

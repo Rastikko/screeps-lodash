@@ -6,7 +6,7 @@ module.exports = function(grunt) {
             options: {
                 email: 'XXX',
                 password: 'XXX',
-                branch: 'simulation',
+                branch: 'default',
                 ptr: false
             },
             dist: {

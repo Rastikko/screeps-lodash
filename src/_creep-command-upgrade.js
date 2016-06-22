@@ -1,7 +1,4 @@
 function commandUpgrade() {
-  if (this.room.memory.spamming) {
-    return 'DELETE';
-  }
   var result = this.upgradeController(this.room.controller);
   var range = this.pos.getRangeTo(this.room.controller);
 

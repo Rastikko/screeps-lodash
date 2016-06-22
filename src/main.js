@@ -19,10 +19,11 @@ main.getCreeps = function() {
 
 main.loopRoles = function(creep) {
   if (creep.memory.role === 'harvester') {
-    commander.stack(['commandHarvestEnergy', 'commandDepositEnergy'], creep);
+    commander.stack(['commandHarvestEnergy'], creep);
   }
+  // TODO: merge carrier and depositer
   if (creep.memory.role === 'carrier') {
-    commander.stack(['commandCarryEnergy', 'commandDepositEnergy'], creep);
+    commander.stack(['commandPickup', 'commandDepositEnergy'], creep);
   }
   // Deny if spammer is bussy
   if (creep.memory.role === 'upgrader') {
