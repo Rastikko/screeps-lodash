@@ -1,4 +1,7 @@
 function commandTransfer() {
+  if (this.room.memory.spamming) {
+    return 'DELETE';
+  }
   if (this.carry.energy) {
     // check for claimed source in memory
     var upgraders = this.room.find(FIND_MY_CREEPS, {

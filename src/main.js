@@ -31,7 +31,7 @@ main.loopRoles = function(creep) {
     commander.stack(['commandUpgrade', 'commandHarvestEnergy', 'commandDepositEnergy'], creep);
   }
   if (creep.memory.role === 'depositer') {
-    commander.stack(['commandPickup', 'commandTransfer', 'commandCarryEnergy', 'commandDepositEnergy'], creep);
+    commander.stack(['commandPickup', 'commandTransfer', 'commandDepositEnergy'], creep);
   }
   if (creep.memory.role === 'builder') {
     creep['memory']['claimedSource'] = null;
