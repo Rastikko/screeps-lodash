@@ -5,22 +5,7 @@ var BUILDER_PARTS = [WORK, CARRY, MOVE];
 var ATTACK_PARTS = [ATTACK, TOUGH, MOVE]
 
 function getPartCost(part) {
-  switch (part) {
-    case MOVE:
-      return 50;
-    case WORK:
-      return 100;
-    case CARRY:
-      return 50;
-    case ATTACK:
-      return 80;
-    case RANGED_ATTACK:
-      return 150;
-    case HEAL:
-      return 250;
-    case TOUGH:
-      return 10;
-  }
+  return BODYPART_COST[part];
 }
 
 function calculateParts(parts, maxCost) {

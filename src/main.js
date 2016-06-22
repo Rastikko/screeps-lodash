@@ -70,6 +70,7 @@ main.loopRooms = function() {
     if (!commander.check(spawn)) {
       commander.stack(['commandCheck', 'commandSpawn'], spawn);
     }
+    main.loopTowers(room);
   }
 }
 
