@@ -1,3 +1,5 @@
-var commandQueueCreep = require('_spawn-command-queue-creep');
+var commandCheck = require('_spawn-command-check');
+var commandSpawn = require('_spawn-command-spawn');
 
-Spawn.prototype.commandQueueCreep = commandQueueCreep;
+Spawn.prototype.commandCheck = commandCheck;
+Spawn.prototype.commandSpawn = commandSpawn;

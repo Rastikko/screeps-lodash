@@ -47,10 +47,6 @@ Commander.execute = function(name, target, parameters) {
   if (result === 'SAVE') {
     Commander.save(name, target, parameters);
   }
-  // if we return an array it means that we want to save using the parameters
-  if (typeof result === 'object') {
-    Commander.save(name, target, result);
-  }
   if (result === 'DELETE') {
     Commander.delete(target);
   }

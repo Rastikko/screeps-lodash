@@ -1,7 +1,7 @@
 function commandAttack(creepDefinition) {
   var target = this.room.getHostileCreep();
   if (target) {
-    if (tower.attack(target) === OK) {
+    if (this.attack(target) === OK) {
        return true;
     }
   }

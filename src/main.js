@@ -3,7 +3,6 @@ require('_spawn');
 require('_creep');
 require('_source');
 require('_tower');
-var Factory = require('factory');
 var commander = require('commander');
 var metaAlpha = require('meta-alpha');
 
@@ -65,16 +64,14 @@ main.loopTowers = function(room) {
 main.loopRooms = function() {
   var rooms = main.getRooms();
   for (var roomName in rooms) {
-    // for now we just have 1 room and 1 meta, so is fine..
-    var roomFactory = new Factory(rooms[roomName], metaAlpha);
-    roomFactory.check();
-    main.loopTowers(rooms[roomName]);
+    var room = rooms[roomName];
+    var spawn = room.getSpawn();
+    room.meta = metaAlpha;
+    if (!commander.check(spawn)) {
+      commander.stack(['commandCheck', 'commandSpawn'], spawn);
+    }
   }
 }
 
 main.loopRooms();
 main.loopCreeps();
-
-// TODO: refactor carrie so carry, pickup and deposite are the same?
-// check who have the most energy available.
-// if there is none who is carriying it then claim it

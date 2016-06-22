@@ -1,7 +1,15 @@
 var spawnHelpers = require('_spawn-helpers');
 
-function commandQueueCreep(creepDefinition) {
-  // TODO: calculate this dinamically
+function commandSpawn() {
+  // Get the role from memory
+  // just do the calculations..
+
+  var metaPosition = this['memory']['metaPosition'];
+  if (metaPosition === undefined) {
+    return 'DELETE';
+  }
+  let creepDefinition  = this.room.meta[metaPosition];
+
   var totalCreeps = 14;
 
   var creepCount = this.room.find(FIND_MY_CREEPS).length;
@@ -14,8 +22,12 @@ function commandQueueCreep(creepDefinition) {
   if (this.canCreateCreep(parts) === ERR_NOT_ENOUGH_ENERGY) {
     return 'SAVE';
   };
-  this.createCreep(parts, null, creepDefinition)
+  this.createCreep(parts, creepDefinition.name, {
+    role: creepDefinition.role,
+    flagName: creepDefinition.flagName
+  });
+  delete this['memory']['metaPosition'];
   return 'DELETE';
 }
 
-module.exports = commandQueueCreep;
+module.exports = commandSpawn;

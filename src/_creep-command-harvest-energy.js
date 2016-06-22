@@ -1,12 +1,8 @@
 function commandHarvestEnergy() {
   var source;
-  if (!source) {
-    let sources = this.room.find(FIND_SOURCES_ACTIVE, {
-      filter: function(s) {
-        return !(s.nClaims && s.nClaims >= 2);
-      }
-    });
-    source = this.pos.findClosestByPath(sources);
+  let flag = Game.flags[this['memory']['flagName']];
+  if (flag) {
+    source = this.room.lookForAt('source', flag.pos.x, flag.pos.y)[0];
   }
   if (source) {
     source.nClaims = (!!source.nClaims) ? ++source.nClaims : 1;
