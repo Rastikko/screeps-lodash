@@ -16,9 +16,9 @@ function commandTransfer() {
       if (result === ERR_NOT_IN_RANGE) {
         this.moveTo(upgraders[0]);
       }
+      return 'SAVE';
     }
-    return 'SAVE';
-	}
+  }
   return 'DELETE';
 }
 

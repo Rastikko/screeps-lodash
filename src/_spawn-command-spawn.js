@@ -22,7 +22,7 @@ function commandSpawn() {
   if (this.canCreateCreep(parts) === ERR_NOT_ENOUGH_ENERGY) {
     return 'SAVE';
   };
-  this.createCreep(parts, creepDefinition.name, {
+  this.createCreep(parts, creepDefinition.name + '-' + this.room.name, {
     role: creepDefinition.role,
     flagName: creepDefinition.flagName
   });
