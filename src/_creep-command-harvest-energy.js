@@ -1,6 +1,6 @@
 function commandHarvestEnergy() {
   var source;
-  let flag = Game.flags[this['memory']['flagName']];
+  let flag = Game.flags[this['memory']['flagName'] + '-' + this.room.name];
   if (flag) {
     source = this.room.lookForAt('source', flag.pos.x, flag.pos.y)[0];
   }
