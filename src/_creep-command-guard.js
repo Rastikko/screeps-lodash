@@ -1,7 +1,7 @@
 function commandGuard() {
   var targets = this.room.find(FIND_HOSTILE_CREEPS);
 
-  if(targets.length) {
+  if (targets.length) {
     if(this.attack(targets[0]) == ERR_NOT_IN_RANGE) {
       this.moveTo(targets[0]);
     }

@@ -40,6 +40,8 @@ Commander.check = function(target) {
 
 Commander.execute = function(name, target, parameters) {
   var targetObject = Commander.getTargetObject(target);
+  if (!targetObject)
+    return;
   if (targetObject['memory']['command'] === undefined && targetObject.say) {
     targetObject.say(name.replace('command', ''));
   }
