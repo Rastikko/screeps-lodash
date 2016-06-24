@@ -43,6 +43,17 @@ Room.prototype.getHostileCreep = function() {
 Room.prototype.getBrokenStructures = function() {
   var brokenStructures = this.find(FIND_STRUCTURES, {
     filter: function(structure) {
+      var road = structure.structureType == STRUCTURE_ROAD && structure.hits < structure.hitsMax;
+      var rampart = structure.structureType == STRUCTURE_RAMPART && structure.hits < 100000;
+      return road || rampart;
+    }
+  });
+  if (brokenStructures.length) {
+    return brokenStructures[0];
+  }
+  
+  brokenStructures = this.find(FIND_STRUCTURES, {
+    filter: function(structure) {
       var isHalfDamaged = structure.hits < structure.hitsMax / 2;
       var isNotALotOfWork = structure.hits < 100000;
       return isHalfDamaged && isNotALotOfWork;
