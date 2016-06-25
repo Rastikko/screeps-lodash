@@ -18,7 +18,6 @@ function calculateParts(parts, maxCost) {
     totalCost += getPartCost(parts[i % parts.length]);
     i++;
   }
-  console.log(finalParts+ ' ' + totalCost);
   return finalParts;
 }
 

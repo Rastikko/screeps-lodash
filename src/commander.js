@@ -10,16 +10,14 @@ Commander.getTargetObject = function(target) {
   return targetObject;
 }
 
-Commander.save = function(name, target, parameters) {
+Commander.save = function(name, target) {
   var targetObject = Commander.getTargetObject(target);
-  targetObject['memory']['command'] = {};
-  targetObject['memory']['command']['name'] = name;
-  targetObject['memory']['command']['targetId'] = target.id;
-  targetObject['memory']['command']['parameters'] = parameters;
+  if (targetObject['memory']) {
+    targetObject['memory']['command'] = name;
+  }
 }
 
 Commander.delete = function(targetObject) {
-  // delete also parameters
   if (targetObject['memory']) {
     delete targetObject['memory']['command'];
   }
@@ -33,21 +31,22 @@ Commander.check = function(target) {
   var haveCommand = targetObject['memory']['command'] !== undefined;
   if (haveCommand) {
     var targetCommandMemory = targetObject['memory']['command'];
-    Commander.execute(targetCommandMemory['name'], targetObject, targetCommandMemory['parameters']);
+    Commander.execute(targetObject['memory']['command'], targetObject);
   }
   return haveCommand;
 }
 
-Commander.execute = function(name, target, parameters) {
+Commander.execute = function(name, target) {
   var targetObject = Commander.getTargetObject(target);
-  if (!targetObject)
+  if (!targetObject) {
     return;
-  if (targetObject['memory']['command'] === undefined && targetObject.say) {
-    targetObject.say(name.replace('command', ''));
   }
-  var result = targetObject[name].apply(targetObject, parameters);
+  var result = targetObject[name].apply(targetObject);
   if (result === 'SAVE') {
-    Commander.save(name, target, parameters);
+    if (targetObject['memory']['command'] === undefined && targetObject.say) {
+      targetObject.say(name.replace('command', ''));
+    }
+    Commander.save(name, target);
   }
   if (result === 'DELETE') {
     Commander.delete(target);
