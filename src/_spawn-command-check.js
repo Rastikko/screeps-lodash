@@ -1,7 +1,7 @@
 function commandCheck() {
   var room = this.room.name;
   var spawn = this;
-  if (spawn['memory']['metaPosition'] !== undefined) {
+  if (spawn.room['memory']['metaPosition'] !== undefined) {
     return 'DELETE';
   }
   var allCreeps = Object.keys(Game.creeps).map(function(key) {
@@ -19,7 +19,7 @@ function commandCheck() {
     // var roomCreepsName = _.pluck(roomCreeps, 'name');
     meta.some(function(metaCreep, index) {
       if (!_.find(roomCreeps, {name: metaCreep.name + '-' + room})) {
-        spawn['memory']['metaPosition'] = index;
+        spawn.room['memory']['metaPosition'] = index;
         return 'DELETE';
       }
     });

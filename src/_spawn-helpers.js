@@ -1,5 +1,5 @@
-var HARVESTER_PARTS = [WORK, WORK, MOVE];
-var UPGRADER_PARTS = [WORK, WORK, CARRY, MOVE];
+var HARVESTER_PARTS = [MOVE, WORK, WORK];
+var UPGRADER_PARTS = [MOVE, WORK, CARRY];
 var MOVER_PARTS = [CARRY, MOVE];
 var BUILDER_PARTS = [WORK, CARRY, MOVE];
 var ATTACK_PARTS = [ATTACK, TOUGH, MOVE]
@@ -18,7 +18,6 @@ function calculateParts(parts, maxCost) {
     totalCost += getPartCost(parts[i % parts.length]);
     i++;
   }
-  console.log(finalParts+ ' ' + totalCost);
   return finalParts;
 }
 

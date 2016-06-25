@@ -8,11 +8,16 @@ var metaAlpha = require('meta-alpha');
 
 var main = {};
 
-for(var i in Memory.creeps) {
-    if(!Game.creeps[i]) {
-        delete Memory.creeps[i];
-    }
-}
+// Use theese to clear old memory once
+// for(var i in Memory.creeps) {
+//     if(!Game.creeps[i]) {
+//         delete Memory.creeps[i];
+//     }
+// }
+//
+// for(var i in Memory.creeps) {
+//     delete Memory.creeps[i]['command'];
+// }
 
 main.getRooms = function() {
   return Game['rooms'];
@@ -53,10 +58,7 @@ main.loopCreeps = function() {
 main.loopTowers = function(room) {
   var towers = room.getTowers();
   for (var tower in towers) {
-    // TODO: make it so command can work
-    if (!towers[tower].commandAttack()) {
-      towers[tower].commandRepair();
-    }
+    commander.stack(['commandAttack', 'commandRepair'], towers[tower]);
   }
 }
 

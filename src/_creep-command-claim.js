@@ -4,7 +4,6 @@ function commandClaim() {
   if (flag) {
     if (flag.room.controller == controller) {
       var result = this.claimController(controller);
-      console.log(result);
       if (result === ERR_NOT_IN_RANGE) {
         this.moveTo(controller);
       }
