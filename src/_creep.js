@@ -6,6 +6,7 @@ var commandUpgrade = require('_creep-command-upgrade');
 var commandBuild = require('_creep-command-build');
 var commandRepair = require('_creep-command-repair');
 var commandGuard = require('_creep-command-guard');
+var commandClaim = require('_creep-command-claim');
 
 Creep.prototype.commandHarvestEnergy = commandHarvestEnergy;
 Creep.prototype.commandDepositEnergy = commandDepositEnergy;
@@ -15,6 +16,7 @@ Creep.prototype.commandUpgrade = commandUpgrade;
 Creep.prototype.commandBuild = commandBuild;
 Creep.prototype.commandRepair = commandRepair;
 Creep.prototype.commandGuard = commandGuard;
+Creep.prototype.commandClaim = commandClaim;
 
 Creep.prototype.findClosestNotEmpty = function () {
   var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];

@@ -25,19 +25,18 @@ main.getCreeps = function() {
 main.loopRoles = function(creep) {
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy'], creep);
-  }
-  if (creep.memory.role === 'carrier') {
+  } else if (creep.memory.role === 'carrier') {
     commander.stack(['commandPickup', 'commandDepositEnergy', 'commandTransfer'], creep);
   }
   // Deny if spammer is bussy
-  if (creep.memory.role === 'upgrader') {
+    else if (creep.memory.role === 'upgrader') {
     commander.stack(['commandUpgrade'], creep);
-  }
-  if (creep.memory.role === 'builder') {
+  } else if (creep.memory.role === 'builder') {
     commander.stack(['commandPickup', 'commandBuild', 'commandRepair'], creep);
-  }
-  if (creep.memory.role === 'guard') {
+  } else if (creep.memory.role === 'guard') {
     commander.stack(['commandGuard'], creep);
+  } else if (creep.memory.role === 'claim') {
+    commander.stack(['commandClaim'], creep);
   }
 }
 
@@ -76,3 +75,4 @@ main.loopRooms = function() {
 
 main.loopRooms();
 main.loopCreeps();
+//console.log(Game.cpu.getUsed())

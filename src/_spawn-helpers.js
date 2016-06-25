@@ -3,6 +3,7 @@ var UPGRADER_PARTS = [WORK, WORK, CARRY, MOVE];
 var MOVER_PARTS = [CARRY, MOVE];
 var BUILDER_PARTS = [WORK, CARRY, MOVE];
 var ATTACK_PARTS = [ATTACK, TOUGH, MOVE]
+var CLAIM_PARTS = [MOVE, CLAIM, CLAIM, CLAIM]
 
 function getPartCost(part) {
   return BODYPART_COST[part];
@@ -14,9 +15,10 @@ function calculateParts(parts, maxCost) {
   var finalParts = [];
   while (totalCost + getPartCost(parts[i % parts.length]) < maxCost) {
     finalParts.push(parts[i % parts.length]);
-    i++;
     totalCost += getPartCost(parts[i % parts.length]);
+    i++;
   }
+  console.log(finalParts+ ' ' + totalCost);
   return finalParts;
 }
 
@@ -32,6 +34,8 @@ function getParts(role, maxCost) {
       return calculateParts(BUILDER_PARTS, maxCost);
     case 'guard':
       return calculateParts(ATTACK_PARTS, maxCost);
+    case 'claim':
+      return calculateParts(CLAIM_PARTS, maxCost);
   }
 }
 
