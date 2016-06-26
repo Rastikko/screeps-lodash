@@ -18,45 +18,55 @@ Creep.prototype.commandRepair = commandRepair;
 Creep.prototype.commandGuard = commandGuard;
 Creep.prototype.commandClaim = commandClaim;
 
-Creep.prototype.findClosestNotEmpty = function () {
-  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var energyMinimum = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
-
+Creep.prototype.findClosest = function(options) {
   var structureTypes = options.structures || [];
+  var searchEmpty = options.empty || false;
+  var energyThreshold = options.energyThreshold || 0;
+  var droppedEnergy = options.droppedEnergy || false;
+  var room = this.room;
 
   var potentialTargets = [];
 
   structureTypes.forEach(function (structureType) {
-    var structures = this.room.find(FIND_MY_STRUCTURES, {
-      filter: function filter(object) {
+    var structures = room.find(FIND_MY_STRUCTURES, {
+      filter: function(object) {
         var energy = object.store ? object.store.energy : object.energy;
-        return object.structureType === structureType && energy > energyMinimum;
+        var energyCapacity = object.store ? object.store.energyCapacity : object.energyCapacity;
+        var rightType = object.structureType === structureType;
+        var enoughtEnergy = (searchEmpty) ? energy < energyCapacity : energy > energyThreshold;
+        var notClaimed = !object.claimed;
+        return rightType && enoughtEnergy && notClaimed;
       }
     });
     potentialTargets = potentialTargets.concat(structures);
-  }, this);
+  });
 
   var creepTypes = options.creeps || [];
   creepTypes.forEach(function (creepType) {
-    var creeps = this.room.find(FIND_MY_CREEPS, {
+    var creeps = room.find(FIND_MY_CREEPS, {
       filter: function filter(creep) {
-        return creep.memory.role === creepType && creep.energy > energyMinimum;
+        var energy = creep.energy;
+        var rightRole = creep['memory']['role'] === creepType;
+        var enoughtEnergy = (searchEmpty) ? energy < creep.carryCapacity : energy > energyThreshold;
+        var notClaimed = !creep.claimed;
+        return rightRole && enoughtEnergy && notClaimed;
       }
     });
     potentialTargets = potentialTargets.concat(creeps);
-  }, this);
+  });
 
   if (options.droppedEnergy) {
     var droppedResources = this.room.find(FIND_DROPPED_RESOURCES, {
       filter: function filter(resource) {
-        return resource.amount > options.droppedEnergy;
+        var enoughtEnergy = resource.amount > energyThreshold;
+        var notClaimed = !resource.claimed;
+        return enoughtEnergy && notClaimed;
       }
     });
     potentialTargets = potentialTargets.concat(droppedResources);
   }
 
   var target = this.pos.findClosestByPath(potentialTargets);
-
   return target;
 };
 

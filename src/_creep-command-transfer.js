@@ -2,6 +2,10 @@ function commandTransfer() {
   if (this.room.getSpawn()['memory']['command'] === 'commandSpawn') {
     return 'DELETE';
   }
+
+  if (this.room.getHostileCreep()) {
+    return 'DELETE';
+  }
   if (this.carry.energy) {
     // check for claimed source in memory
     var upgraders = this.room.find(FIND_MY_CREEPS, {
