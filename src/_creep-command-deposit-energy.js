@@ -14,9 +14,7 @@ function commandDepositEnergy() {
     }
 
     if (!target) {
-      target = this.findClosest({
-        structures: [STRUCTURE_STORAGE]
-      });
+      target = this.room.storage;
     }
 
     if (target) {
