@@ -31,7 +31,7 @@ main.loopRoles = function(creep) {
   if (creep.memory.role === 'harvester') {
     commander.stack(['commandHarvestEnergy'], creep);
   } else if (creep.memory.role === 'carrier') {
-    commander.stack(['commandPickup', 'commandDepositEnergy', 'commandTransfer'], creep);
+    commander.stack(['commandPickup', 'commandTransfer', 'commandDepositEnergy'], creep);
   }
   // Deny if spammer is bussy
     else if (creep.memory.role === 'upgrader') {
@@ -58,7 +58,8 @@ main.loopCreeps = function() {
 main.loopTowers = function(room) {
   var towers = room.getTowers();
   for (var tower in towers) {
-    commander.stack(['commandAttack', 'commandRepair'], towers[tower]);
+    // TODO: check if we are not beeing attack to commandRepair
+    commander.stack(['commandAttack'], towers[tower]);
   }
 }
 

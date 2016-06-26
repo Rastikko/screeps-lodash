@@ -1,17 +1,22 @@
 function commandDepositEnergy() {
   if (this.carry.energy) {
-    var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
-      filter: function(obj) {
-        return obj.structureType == STRUCTURE_EXTENSION && obj.energy < obj.energyCapacity;
-      }
+
+    var target = this.findClosest({
+      structures: [STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_TOWER],
+      empty: true
     });
 
     if (!target) {
-      target = this.room.getEmptySpawn();
+      target = this.findClosest({
+        structures: [STRUCTURE_CONTAINER, STRUCTURE_LINK],
+        empty: true
+      });
     }
 
     if (!target) {
-      target = this.room.getEmptyTower();
+      target = this.findClosest({
+        structures: [STRUCTURE_STORAGE]
+      });
     }
 
     if (target) {
