@@ -45,7 +45,7 @@ main.loopRoles = function(creep) {
     else if (creep.memory.role === 'upgrader') {
     commander.stack(['commandUpgrade'], creep);
   } else if (creep.memory.role === 'builder') {
-    commander.stack(['commandHarvestEnergy', 'commandBuild'], creep);
+    commander.stack(['commandPickup', 'commandBuild', 'commandRepair'], creep);
   } else if (creep.memory.role === 'guard') {
     commander.stack(['commandGuard'], creep);
   } else if (creep.memory.role === 'claim') {
