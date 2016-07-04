@@ -8,6 +8,5 @@ module.exports = [
   { role: 'carrier', name: 'carrier4' },
   { role: 'upgrader', name: 'upgrader1'},
   { role: 'upgrader', name: 'upgrader2'},
-  { role: 'builder', name: 'builder1'},
-  { role: 'harvester', flagName: 'mine2', name: 'harvester4'},
+  { role: 'builder', name: 'builder1'}
 ]

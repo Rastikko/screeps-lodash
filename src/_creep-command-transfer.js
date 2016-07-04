@@ -1,5 +1,5 @@
 function commandTransfer() {
-  if (this.room.getSpawn()['memory']['command'] === 'commandSpawn') {
+  if (this.room['memory']['metaPosition'] !== undefined) {
     return 'DELETE';
   }
 

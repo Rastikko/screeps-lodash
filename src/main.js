@@ -1,3 +1,11 @@
+// TODO: bundle all screep to improve CPU usage
+// TODO: allow different meta rooms
+// TODO: optimize how much energy we will use to create creeps
+// TODO: link behaviour
+// TODO: container behaviour
+// TODO: send reinforzment to other rooms
+// TODO: spam guards if there is hostile creeps attacking
+
 require('_room');
 require('_spawn');
 require('_creep');
@@ -37,7 +45,7 @@ main.loopRoles = function(creep) {
     else if (creep.memory.role === 'upgrader') {
     commander.stack(['commandUpgrade'], creep);
   } else if (creep.memory.role === 'builder') {
-    commander.stack(['commandPickup', 'commandBuild', 'commandRepair'], creep);
+    commander.stack(['commandHarvestEnergy', 'commandBuild'], creep);
   } else if (creep.memory.role === 'guard') {
     commander.stack(['commandGuard'], creep);
   } else if (creep.memory.role === 'claim') {
@@ -59,7 +67,7 @@ main.loopTowers = function(room) {
   var towers = room.getTowers();
   for (var tower in towers) {
     // TODO: check if we are not beeing attack to commandRepair
-    commander.stack(['commandAttack'], towers[tower]);
+    commander.stack(['commandAttack', 'commandRepair'], towers[tower]);
   }
 }
 
